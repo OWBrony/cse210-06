@@ -19,6 +19,7 @@ MAX_X = 900
 MAX_Y = 600
 CELL_SIZE = 15
 FONT_SIZE = 15
+# Right here is the columns and rows to use!!!
 COLS = 60
 ROWS = 40
 CAPTION = "Robot Finds Kitten"
