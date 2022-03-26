@@ -19,7 +19,6 @@ MAX_X = 900
 MAX_Y = 600
 CELL_SIZE = 15
 FONT_SIZE = 15
-# Right here is the columns and rows to use!!!
 COLS = 60
 ROWS = 40
 CAPTION = "Robot Finds Kitten"
@@ -58,7 +57,9 @@ def main():
         data = file.read()
         messages = data.splitlines()
 
-    with open("/Users/alford/CLASSES/WINTER2022/CS210/REPOSITORIES/cse210-06/rfk-incomplete/rfk/data/level1.txt") as level:
+
+
+    with open("mazegame/maze/data/level1.txt") as level:
         for y, row in enumerate(level):
             for x, column in enumerate(row.strip()):
                 print(f"x,y={x},{y} char={column}")
@@ -80,14 +81,9 @@ def main():
                     artifact.set_position(position)
                     artifact.set_message(message)
                     cast.add_actor("artifacts", artifact)
-        
-        
-        artifact.set_text(text)
-        artifact.set_font_size(FONT_SIZE)
-        artifact.set_color(color)
-        artifact.set_position(position)
-        artifact.set_message(message)
-        cast.add_actor("artifacts", artifact)
+
+
+
     
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
