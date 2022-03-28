@@ -6,6 +6,7 @@ from game.casting.artifact import Artifact
 from game.casting.cast import Cast
 
 from game.directing.director import Director
+from game.directing.global_function import MazeBuilder
 
 from game.services.keyboard_service import KeyboardService
 from game.services.video_service import VideoService
@@ -53,34 +54,7 @@ def main():
     cast.add_actor("robots", robot)
     
     # create the artifacts
-    with open(DATA_PATH) as file:
-        data = file.read()
-        messages = data.splitlines()
-
-
-
-    with open("mazegame/maze/data/level1.txt") as level:
-        for y, row in enumerate(level):
-            for x, column in enumerate(row.strip()):
-                print(f"x,y={x},{y} char={column}")
-                # for n in range(DEFAULT_ARTIFACTS):
-                text = "X"
-                # message = messages[n]
-                position = Point(x, y)
-                position = position.scale(CELL_SIZE)
-
-                r = random.randint(0, 255)
-                g = random.randint(0, 255)
-                b = random.randint(0, 255)
-                color = Color(r, g, b)
-                
-                artifact = Artifact()
-                artifact.set_text(text)
-                artifact.set_font_size(FONT_SIZE)
-                artifact.set_color(color)
-                artifact.set_position(position)
-                artifact.set_message("HI")
-                cast.add_actor("artifacts", artifact)
+    MazeBuilder._build_maze
 
 
 
