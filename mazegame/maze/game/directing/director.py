@@ -8,7 +8,7 @@ class Director:
         _video_service (VideoService): For providing video output.
     """
 
-    def __init__(self, keyboard_service, video_service):
+    def __init__(self, keyboard_service, video_service, level_service):
         """Constructs a new Director using the specified keyboard and video services.
         
         Args:
@@ -17,6 +17,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self._level_service = level_service
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -25,6 +26,7 @@ class Director:
             cast (Cast): The cast of actors.
         """
         self._video_service.open_window()
+        self._level_service.load_level(cast, "mazegame/maze/data/level1.txt")
         while self._video_service.is_window_open():
             self._get_inputs(cast)
             self._do_updates(cast)
@@ -47,19 +49,11 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
-        banner = cast.get_first_actor("banners")
         robot = cast.get_first_actor("robots")
-        artifacts = cast.get_actors("artifacts")
 
-        banner.set_text("")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
-        
-        for artifact in artifacts:
-            if robot.get_position().equals(artifact.get_position()):
-                message = artifact.get_message()
-                banner.set_text(message)    
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.

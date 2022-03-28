@@ -1,32 +1,15 @@
-import os
-import random
+from game.constants import Constants
 
 from game.casting.actor import Actor
-from game.casting.artifact import Artifact
 from game.casting.cast import Cast
 
 from game.directing.director import Director
-from game.directing.global_function import MazeBuilder
 
 from game.services.keyboard_service import KeyboardService
 from game.services.video_service import VideoService
+from game.services.level_service import LevelService
 
-from game.shared.color import Color
 from game.shared.point import Point
-
-
-FRAME_RATE = 12
-MAX_X = 900
-MAX_Y = 600
-CELL_SIZE = 15
-FONT_SIZE = 15
-COLS = 60
-ROWS = 40
-CAPTION = "Robot Finds Kitten"
-DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
-WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 40
-
 
 def main():
     
@@ -36,35 +19,30 @@ def main():
     # create the banner
     banner = Actor()
     banner.set_text("")
-    banner.set_font_size(FONT_SIZE)
-    banner.set_color(WHITE)
-    banner.set_position(Point(CELL_SIZE, 0))
+    banner.set_font_size(Constants.FONT_SIZE)
+    banner.set_color(Constants.WHITE)
+    banner.set_position(Point(Constants.CELL_SIZE, 0))
     cast.add_actor("banners", banner)
     
     # create the robot
-    x = int(MAX_X / 2)
-    y = int(MAX_Y / 2)
+    x = int(Constants.MAX_X / 2)
+    y = int(Constants.MAX_Y / 2)
     position = Point(x, y)
 
     robot = Actor()
     robot.set_text("#")
-    robot.set_font_size(FONT_SIZE)
-    robot.set_color(WHITE)
+    robot.set_font_size(Constants.FONT_SIZE)
+    robot.set_color(Constants.WHITE)
     robot.set_position(position)
     cast.add_actor("robots", robot)
-    
-    # create the artifacts
-    MazeBuilder._build_maze
 
-
-
-    
     # start the game
-    keyboard_service = KeyboardService(CELL_SIZE)
-    video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
-    director = Director(keyboard_service, video_service)
+    keyboard_service = KeyboardService(Constants.CELL_SIZE)
+    video_service = VideoService(Constants.CAPTION, Constants.MAX_X, Constants.MAX_Y, 
+        Constants.CELL_SIZE, Constants.FRAME_RATE)
+    level_service = LevelService()
+    director = Director(keyboard_service, video_service, level_service)
     director.start_game(cast)
-
 
 if __name__ == "__main__":
     main()
