@@ -62,9 +62,9 @@ def main():
     with open("mazegame/maze/data/level1.txt") as level:
         for y, row in enumerate(level):
             for x, column in enumerate(row.strip()):
-                print(f"x,y={x},{y} char={column}")
+                # print(f"x,y={x},{y} char={column}")
                 for n in range(DEFAULT_ARTIFACTS):
-                    text = chr(random.randint(33, 126))
+                    text = "X"
                     message = messages[n]
                     position = Point(x, y)
                     position = position.scale(CELL_SIZE)
