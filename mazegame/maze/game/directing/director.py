@@ -1,3 +1,8 @@
+from game.services.level_service import LevelService
+from game.shared.point import Point
+from game.constants import Constants
+
+
 class Director:
     """A person who directs the game. 
     
@@ -41,7 +46,11 @@ class Director:
         """
         robot = cast.get_first_actor("robots")
         velocity = self._keyboard_service.get_direction()
-        robot.set_velocity(velocity)        
+        robot_point = robot.get_position().scale(1/Constants.CELL_SIZE)
+        if not self._level_service.at(robot_point.add(velocity.scale(1/Constants.CELL_SIZE))) == LevelService.WALL:
+            robot.set_velocity(velocity)
+        else:
+            robot.set_velocity(Point(0,0))    
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.

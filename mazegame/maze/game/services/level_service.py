@@ -15,8 +15,8 @@ class LevelService:
     def __init__(self):
         self._matrix = None
 
-    def at(self, x, y):
-        return self._matrix[x, y]
+    def at(self, point):
+        return self._matrix[int(point.get_x()), int(point.get_y())]
 
     def _char_to_int(self, c):
         if c == "X": return LevelService.WALL
@@ -36,7 +36,6 @@ class LevelService:
         with open(path) as level:
             for y, row in enumerate(level):
                 for x, column in enumerate(row.strip()):
-                    print(f"{x} {y}")
                     self._matrix[x, y] = self._char_to_int(column)
         # Construct actors from level data
         self._clear_level_actors(cast)

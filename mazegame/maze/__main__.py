@@ -25,8 +25,8 @@ def main():
     cast.add_actor("banners", banner)
     
     # create the robot
-    x = int(Constants.MAX_X / 2)
-    y = int(Constants.MAX_Y / 2)
+    x = Constants.PLAYER_START_X * Constants.CELL_SIZE
+    y = Constants.PLAYER_START_Y * Constants.CELL_SIZE
     position = Point(x, y)
 
     robot = Actor()
