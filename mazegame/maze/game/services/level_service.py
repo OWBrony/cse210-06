@@ -1,5 +1,4 @@
 import numpy as np
-import random
 
 from game.constants import Constants
 
@@ -11,6 +10,9 @@ from game.shared.point import Point
 class LevelService:
     EMPTY = 0
     WALL = 1
+    EXIT_1 = 2
+    EXIT_2 = 3
+    EXIT_3 = 4
 
     def __init__(self):
         self._matrix = None
@@ -20,10 +22,15 @@ class LevelService:
 
     def _char_to_int(self, c):
         if c == "X": return LevelService.WALL
+        if c == "1": return LevelService.EXIT_1
+        if c == "2": return LevelService.EXIT_2
+        if c == "3": return LevelService.EXIT_3
         return LevelService.EMPTY
 
     def _construct_actor(self, n):
         if n == LevelService.WALL: return (Wall(), "walls")
+        if n == LevelService.EXIT_1:
+            pass
         return (None, None)
 
     def _clear_level_actors(self, cast):

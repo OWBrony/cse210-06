@@ -1,7 +1,5 @@
 from game.constants import Constants
-
 from game.shared.color import Color
-
 from game.casting.actor import Actor
 
 class Wall(Actor):
