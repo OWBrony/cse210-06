@@ -12,3 +12,5 @@ class Constants:
     CAPTION = "Super Maze"
     # DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
     WHITE = Color(255, 255, 255)
+    PLAYER_START_X = 2
+    PLAYER_START_Y = 1
